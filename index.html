@@ -30,7 +30,7 @@
           transition: color 2s;
          }
 
-         path {
+         #pie {
           fill: steelblue;
           transition: fill 250ms linear;
           transition-delay: 150ms;
@@ -39,6 +39,20 @@
         path:hover {
           fill: lightblue;
           transition-delay: 0;
+        }
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: grey;
+          stroke-width: 1;
+          shape-rendering: crispEdges;
+        }
+
+        #valLine {
+          stroke: steelblue;
+          stroke-width: 2;
+          fill: none;
         }
 
 

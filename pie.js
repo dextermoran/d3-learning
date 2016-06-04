@@ -27,6 +27,7 @@ function popoutPie(data, width, height){
     var svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height)
+        .attr("id", function() {return "pie"})
       .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
