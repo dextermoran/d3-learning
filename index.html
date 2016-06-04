@@ -1,61 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>D3 test</title>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
 
     <style>
-
         @keyframes example {
-        from {background-color: lightblue;}
-        to {background-color: steelblue;}
-      }
+            from {
+                background-color: lightblue;
+            }
+            to {
+                background-color: steelblue;
+            }
+        }
 
         .chart div {
-          font: 14px sans-serif;
-          color: whitesmoke;
-          background-color: steelblue;
-          text-align: right;
-          padding: 15px;
-          border-radius: 10px;
-          margin: 3px;
-          color: white;
-          animation-name: example;
-          animation-duration: 2s;
-          transition: width 2s;
-          transition: color 2s;
-         }
+            font: 14px sans-serif;
+            color: whitesmoke;
+            background-color: steelblue;
+            text-align: right;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 3px;
+            color: white;
+            animation-name: example;
+            animation-duration: 2s;
+            transition: width 2s;
+            transition: color 2s;
+        }
 
-         #pie {
-          fill: steelblue;
-          transition: fill 250ms linear;
-          transition-delay: 150ms;
+        #pie #user0 {
+            fill: steelblue;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
+        }
+
+        #pie #user1 {
+            fill: turquoise;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
+        }
+
+        #pie #user2 {
+            fill: khaki;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
+        }
+
+        #pie #user3 {
+            fill: aquamarine;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
+        }
+
+        #pie #user4 {
+            fill: teal;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
+        }
+
+        #pie #user5 {
+            fill: lightgreen;
+            transition: fill 250ms linear;
+            transition-delay: 150ms;
         }
 
         path:hover {
-          fill: lightblue;
-          transition-delay: 0;
+            fill: lightblue;
+            transition-delay: 0;
         }
 
         .axis path,
         .axis line {
-          fill: none;
-          stroke: grey;
-          stroke-width: 1;
-          shape-rendering: crispEdges;
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
         }
 
         #valLine {
-          stroke: steelblue;
-          stroke-width: 2;
-          fill: none;
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
         }
 
+        .tick {
+            font-family: sans-serif;
+        }
 
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            width: 960px;
+            height: 500px;
+            position: relative;
+        }
+
+        polyline {
+            opacity: .3;
+            stroke: black;
+            stroke-width: 2px;
+            fill: none;
+        }
     </style>
 
     <h1> d3 test </h1>
@@ -66,5 +116,6 @@
     <script src="app.js"></script>
     <script src="pie.js"></script>
     <script src="line.js"></script>
-  </body>
+</body>
+
 </html>
