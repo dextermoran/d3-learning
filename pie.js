@@ -53,6 +53,7 @@ function popoutPie(data, width, height) {
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+
     svg.selectAll("path")
         .data(pie(points))
         .enter().append("path")
@@ -64,12 +65,19 @@ function popoutPie(data, width, height) {
         .attr("fill", function(d, i) {
             return colors[i];
         })
+        .attr("user", function(d,i) {return usernames[i]})
+        .attr("points", function(d,i) {return points[i]})
+
         .on("mouseout", arcTween(outerRadius - 20, 150))
         .on("click", function() {
+                var that = this
                 d3.selectAll("#legContent").remove();
                 d3.select("#legend")
                     .append("div")
                     .attr("id", "legContent")
+                    .style("margin-left", function(){return parseInt(width/4) + "px"})
+                    .text(function(d,i) { return that.attributes[2].value  + " " + that.attributes[3].value })
+                    .style("background-color", function(d,i) { return that.attributes[1].value })
             });
 
             function arcTween(outerRadius, delay) {
