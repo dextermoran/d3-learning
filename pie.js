@@ -45,6 +45,7 @@ function popoutPie(data, width, height) {
 
     var arc = d3.svg.arc()
         .padRadius(outerRadius)
+        .outerRadius(outerRadius)
         .innerRadius(innerRadius);
 
     var svg = d3.select("body").append("svg")
@@ -52,15 +53,17 @@ function popoutPie(data, width, height) {
         .attr("height", height)
         .attr("id", function() {
             return "pie"
-        })
+        }).attr("class", "legend")
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-var counter = 0
+    var counter = 0
 
     svg.selectAll("path")
         .data(pie(points))
-        .enter().append("path").attr("id", function(d,i){ return "user" + i;})
+        .enter().append("path").attr("id", function(d, i) {
+            return "user" + i;
+        })
         .each(function(d) {
             d.outerRadius = outerRadius - 20;
         })
@@ -74,8 +77,46 @@ var counter = 0
             return usernames[i];
         }).style("color", "red");
 
-    svg.selectAll("path").append("p").text(function(d,i) { return usernames[i]; });
+    d3.select("body").append("p")
+        .text(function(d, i) {
+            return usernames[i];
+        })
+        .style("color", "gray");
 
+
+    // more testing --------------------------------
+
+    var legendRectSize = 18;
+    var legendSpacing = 4;
+
+    var color = d3.scale.ordinal()
+        .range(['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
+
+    var legend = svg.selectAll('.legend')
+        .data(color.domain())
+        .enter()
+        .append('g')
+        .attr('class', 'legend')
+        .attr('transform', function(d, i) {
+            var height = legendRectSize + legendSpacing;
+            var offset = height * color.domain().length / 2;
+            var horz = -2 * legendRectSize;
+            var vert = i * height - offset;
+            return 'translate(' + horz + ',' + vert + ')';
+        });
+
+    console.log(legend.append('rect')
+        .attr('width', legendRectSize)
+        .attr('height', legendRectSize)
+        .style('fill', color)
+        .style('stroke', color))
+
+    legend.append('text')
+        .attr('x', legendRectSize + legendSpacing)
+        .attr('y', legendRectSize - legendSpacing)
+        .text(function(d,i) {
+            return usernames[i];
+        });
 
     //testing--------------------------
 

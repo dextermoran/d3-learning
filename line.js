@@ -16,9 +16,8 @@ function lineGraph(data) {
         width = 600 - margin.left - margin.right,
         height = 270 - margin.top - margin.bottom;
 
-    // Parse the date / time  ---- this is wonky 
+    // Parse the date / time  ---- this is wonky
     var parseDate = d3.time.format("%d-%b-%y").parse;
-
     // Set the ranges
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
