@@ -8,6 +8,7 @@
 // pass in an array of hashes?
 
 // var data = [5, 8, 13, 21, 34, 55, 89];
+var data = [5, 8, 13, 21, 34, 55, 89];
 var data = [{
     username: "dom",
     points: 80
@@ -45,7 +46,6 @@ function popoutPie(data, width, height) {
 
     var arc = d3.svg.arc()
         .padRadius(outerRadius)
-        .outerRadius(outerRadius)
         .innerRadius(innerRadius);
 
     var svg = d3.select("body").append("svg")
@@ -53,149 +53,19 @@ function popoutPie(data, width, height) {
         .attr("height", height)
         .attr("id", function() {
             return "pie"
-        }).attr("class", "legend")
+        })
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    var counter = 0
-
     svg.selectAll("path")
         .data(pie(points))
-        .enter().append("path").attr("id", function(d, i) {
-            return "user" + i;
-        })
+        .enter().append("path")
         .each(function(d) {
             d.outerRadius = outerRadius - 20;
         })
         .attr("d", arc)
-        .on("click", arcTween(outerRadius, 0))
-        .text(function(d, i) {
-            return usernames[i];
-        }).style("color", "red")
-        .on("mouseout", arcTween(outerRadius - 20, 150))
-        .text(function(d, i) {
-            return usernames[i];
-        }).style("color", "red");
-
-    d3.select("body").append("p")
-        .text(function(d, i) {
-            return usernames[i];
-        })
-        .style("color", "gray");
-
-
-    // more testing --------------------------------
-
-    var legendRectSize = 18;
-    var legendSpacing = 4;
-
-    var color = d3.scale.ordinal()
-        .range(['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
-
-    var legend = svg.selectAll('.legend')
-        .data(color.domain())
-        .enter()
-        .append('g')
-        .attr('class', 'legend')
-        .attr('transform', function(d, i) {
-            var height = legendRectSize + legendSpacing;
-            var offset = height * color.domain().length / 2;
-            var horz = -2 * legendRectSize;
-            var vert = i * height - offset;
-            return 'translate(' + horz + ',' + vert + ')';
-        });
-
-    console.log(legend.append('rect')
-        .attr('width', legendRectSize)
-        .attr('height', legendRectSize)
-        .style('fill', color)
-        .style('stroke', color))
-
-    legend.append('text')
-        .attr('x', legendRectSize + legendSpacing)
-        .attr('y', legendRectSize - legendSpacing)
-        .text(function(d,i) {
-            return usernames[i];
-        });
-
-    //testing--------------------------
-
-
-
-
-    // svg.append("g")
-    //     .attr("class", "labels");
-    // svg.append("g")
-    //     .attr("class", "lines");
-    // svg.append("g")
-    //     .attr("class", "slices");
-    //
-    // var key = function(d, i) {
-    //     return usernames[i];
-    // };
-    //
-    // var text = svg.select(".labels").selectAll("text")
-    //     .data(pie(points), key);
-    //
-    // text.enter()
-    //     .append("text")
-    //     .attr("dy", ".7em")
-    //     .text(function(d, i) {
-    //         return usernames[i];
-    //     });
-    //
-    // var radius = Math.min(width, height) / 2;
-    //
-    //
-    // var outerArc = d3.svg.arc()
-    //     .innerRadius(radius * 0.9)
-    //     .outerRadius(radius * 0.9);
-    //
-    //
-    // function midAngle(d) {
-    //     return d.startAngle + (d.endAngle - d.startAngle) / 2;
-    // }
-    //
-    // text.transition().duration(1000)
-    //     .attrTween("transform", function(d) {
-    //         this._current = this._current || d;
-    //         var interpolate = d3.interpolate(this._current, d);
-    //         this._current = interpolate(0);
-    //         return function(t) {
-    //             var d2 = interpolate(t);
-    //             var pos = outerArc.centroid(d2);
-    //             pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-    //             return "translate(" + pos + ")";
-    //         };
-    //     });
-    //
-    //
-    // text.exit()
-    //     .remove();
-    //
-    // var polyline = svg.select(".lines").selectAll("polyline")
-    //     .data(pie(points), key);
-    //
-    // polyline.enter()
-    //     .append("polyline");
-    //
-    // polyline.transition().duration(1000)
-    //     .attrTween("points", function(d) {
-    //         this._current = this._current || d;
-    //         var interpolate = d3.interpolate(this._current, d);
-    //         this._current = interpolate(0);
-    //         return function(t) {
-    //             var d2 = interpolate(t);
-    //             var pos = outerArc.centroid(d2);
-    //             pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
-    //             return [arc.centroid(d2), outerArc.centroid(d2), pos];
-    //         };
-    //     });
-    //
-    // polyline.exit()
-    //     .remove();
-    //
-    //-------------------------------------------
+        .on("mouseover", arcTween(outerRadius, 0))
+        .on("mouseout", arcTween(outerRadius - 20, 150));
 
     function arcTween(outerRadius, delay) {
         return function() {
