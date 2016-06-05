@@ -59,7 +59,7 @@ function barGraph(data) {
         }).style("color", "lightblue")
         .transition().text(function(d, i) {
             return dates[i] + " " + points[i] + " points";
-        }).style("color", "whitesmoke");
+        }).style("color", "#D8DAC5");
 }
 
 

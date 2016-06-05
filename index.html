@@ -10,6 +10,7 @@
 
 
     <style>
+
         @keyframes example {
             from {
                 background-color: lightblue;
@@ -32,6 +33,20 @@
             animation-duration: 2s;
             transition: width 2s;
             transition: color 2s;
+        }
+
+        #legContent {
+          display: inline-block;
+          background-color: red;
+          height: 50px;
+          width: 50px;
+        }
+
+        #legend {
+          height: 20%;
+          width: 20%;
+          background-color: blue;
+          display: block;
         }
 
         #pie {
@@ -89,9 +104,10 @@
     <div class="chart"></div>
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
     <script src="pie.js"></script>
-    <script src="line.js"></script>
+    <div id="legend"></div>
+    <!-- <script src="line.js"></script> -->
 </body>
 
 </html>

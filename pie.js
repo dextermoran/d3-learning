@@ -4,11 +4,6 @@
 // requires nothing on the page
 // see css below
 
-// this still needs to display the user name for each block
-// pass in an array of hashes?
-
-// var data = [5, 8, 13, 21, 34, 55, 89];
-// var data = [5, 8, 13, 21, 34, 55, 89];
 var data = [{
     username: "dom",
     points: 80
@@ -69,30 +64,24 @@ function popoutPie(data, width, height) {
         .attr("fill", function(d, i) {
             return colors[i];
         })
-        .on("mouseout", arcTween(outerRadius - 20, 150));
-
-    function arcTween(outerRadius, delay) {
-        return function() {
-            d3.select(this).transition().delay(delay).attrTween("d", function(d) {
-                var i = d3.interpolate(d.outerRadius, outerRadius);
-                return function(t) {
-                    d.outerRadius = i(t);
-                    return arc(d);
-                };
+        .on("mouseout", arcTween(outerRadius - 20, 150))
+        .on("click", function() {
+                d3.selectAll("#legContent").remove();
+                d3.select("#legend")
+                    .append("div")
+                    .attr("id", "legContent")
             });
-        };
-    }
 
-}
+            function arcTween(outerRadius, delay) {
+                return function() {
+                    d3.select(this).transition().delay(delay).attrTween("d", function(d) {
+                        var i = d3.interpolate(d.outerRadius, outerRadius);
+                        return function(t) {
+                            d.outerRadius = i(t);
+                            return arc(d);
+                        };
+                    });
+                };
+            }
 
-
-// path {
-//  fill: steelblue;
-//  transition: fill 250ms linear;
-//  transition-delay: 150ms;
-// }
-//
-// path:hover {
-//  fill: lightblue;
-//  transition-delay: 0;
-// }
+        }
