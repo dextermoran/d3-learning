@@ -8,7 +8,7 @@
 // pass in an array of hashes?
 
 // var data = [5, 8, 13, 21, 34, 55, 89];
-var data = [5, 8, 13, 21, 34, 55, 89];
+// var data = [5, 8, 13, 21, 34, 55, 89];
 var data = [{
     username: "dom",
     points: 80
@@ -31,6 +31,7 @@ function popoutPie(data, width, height) {
 
     var points = [];
     var usernames = [];
+    var colors = ['#00040D', '#65756B', '#9EA792', '#333B3D'];
 
     data.forEach(function(i) {
         points.push(i.points)
@@ -65,6 +66,9 @@ function popoutPie(data, width, height) {
         })
         .attr("d", arc)
         .on("mouseover", arcTween(outerRadius, 0))
+        .attr("fill", function(d, i) {
+            return colors[i];
+        })
         .on("mouseout", arcTween(outerRadius - 20, 150));
 
     function arcTween(outerRadius, delay) {
